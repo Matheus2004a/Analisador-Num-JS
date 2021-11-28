@@ -8,10 +8,9 @@ btnGenerateTable.addEventListener("click", () => {
     if (numEsc.value === "") {
         error.innerHTML = "<font color='red'>Insira um número da tabuada</font>"
     } else {
-        let count = 0
-        while (numEsc.value <= 10) {
-            table.value = `${numEsc.value} X ${count} = ${numEsc.value * count}`
-            count++
+        let formatNumEsc = Number(numEsc.value)
+        for (let count = 0; count <= 10; count++) {
+            table.innerHTML = `${formatNumEsc} X ${count} = ${formatNumEsc * count}`
         }
     }
 })
@@ -19,6 +18,7 @@ btnGenerateTable.addEventListener("click", () => {
 const btnClear = document.querySelector("#btn-clear")
 btnClear.addEventListener("click", () => {
     error.innerHTML = ""
+    table.innerHTML = "Digite um número acima"
     numEsc.value = ""
     numEsc.focus()
 })
