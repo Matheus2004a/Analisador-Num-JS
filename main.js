@@ -12,7 +12,7 @@ const btnGenerateTable = document.querySelector("#btn-submit")
 btnGenerateTable.addEventListener("click", () => {
     if (numEsc.value === "") {
         error.innerHTML = "<font color='red'>Insira um número da tabuada</font>"
-        clearTableAndError()
+        table.innerHTML = ""
     } else {
         let formatNumEsc = Number(numEsc.value)
         clearTableAndError()
