@@ -1,7 +1,8 @@
-# Tabuada com validações
+# Analisador
 
-Este site exibe a tabuada dos números 0 à 10 do número escolhido, como também contém pequenas validações e funcinalidades como:
+Aplicação que armazena um conjunto de vários números em um array e interaje posteriormente com o usuário contendo as seguintes funcionalidades:
 
-- Não mostrar a tabuada de um número não inserido no campo.
-- Exibir a tabuada ao apertar a tecla ENTER (mas deve ter um número preenchido no campo).
-- Limpa o campo e a tabuada ao clicar no botão de "limpar".
+- Insere os valores digitados em um select.
+- Ao clicar no botão `finalizar` obtemos as seguintes operações: 
+    - Total de números cadastrados, soma, identificação do maior e menor número digitado e a média do total.
+- Contém algumas validações como: Não permitir inserir valores abaixo ou igual a 0, acima de 100, clicar no botão `finalizar` se o campo de inserção de números estiver vazio e tentar adicionar valores sem digitar um.
