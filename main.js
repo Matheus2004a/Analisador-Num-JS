@@ -1,5 +1,5 @@
 let numEsc = document.querySelector("#num-esc")
-let list = document.querySelector("select")
+const list = document.querySelector("select")
 const resultList = document.querySelector(".content-resp")
 
 const form = document.querySelector("form")
@@ -16,77 +16,67 @@ function isNumber(number) {
     if (Number(number) >= 1 && Number(number) <= 100) {
         return true
     } else {
-        error.innerHTML = ""
-
-        /* clearTableAndError() */
-        /* makeOperations() */
+        return false
     }
 }
 
-/* function inList(number, listVerify) {
+function inList(number, listVerify) {
     if (listVerify.indexOf(Number(number)) !== -1) {
-        listNumbers.push(Number(number))
-    } else {
-        return false
-    }
-
-    makeOperations()
-     if (listVerify.indexOf(listNumbers) !== -1) {
-        listNumbers.push(Number(number))
         return true
     } else {
         return false
-    } 
-} */
+    }
+}
 
 function calcNumbers() {
-    if (isNumber(numEsc.value)) {
+    if (isNumber(numEsc.value) && !inList(numEsc.value, listNumbers)) {
         listNumbers.push(Number(numEsc.value))
-        makeOperations()
+        addValues()
+        clearTableAndError()
     } else {
         verifyErrors()
     }
-    /* if (numEsc.value === "" || numEsc.value <= 0 || numEsc.value > 100) {
-        verifyErrors()
-    } else {
-        error.innerHTML = ""
-
-        clearTableAndError()
-        makeOperations()
-    }*/
     console.log(listNumbers)
 }
 
-function makeOperations() {
-    for (let item in listNumbers) {
-
-        let itemTable = document.createElement("option")
-        itemTable.innerHTML = `Valor ${listNumbers[item]} adicionado`
-        list.appendChild(itemTable)
-
-        /* let sumNumbers = 0
-        let numBiggest
-
-        sumNumbers += listNumbers[item]
-
-        if (listNumbers[item] >= numBiggest) {
-            numBiggest = listNumbers[item]
-        } */
-
-        /* resultList.appendChild(respInfosItems)
-        let respInfosItems = document.createElement("p")
-        respInfosItems.innerHTML = `Somando todos os valores, temos ${sumNumbers}.` */
-    }
+function addValues() {
+    let itemTable = document.createElement("option")
+    itemTable.text = `Valor ${numEsc.value} adicionado`
+    list.appendChild(itemTable)
 }
 
 const btnClear = document.querySelector("#btn-clear")
 btnClear.addEventListener("click", () => {
+    let sumNumbers = 0
+    let numBiggest = 0
+    let smallestNum = 0
+    let mediaValues = 0
+    
+    for (let item in listNumbers) {
+        sumNumbers += listNumbers[item]
+
+        if (listNumbers[item] >= numBiggest) {
+            numBiggest = listNumbers[item]
+        }
+
+        if (smallestNum < listNumbers[item]) {
+            smallestNum = listNumbers[item]
+        }    
+    }
+    
+    let respInfosItems = document.createElement("p")
+    respInfosItems.innerHTML = `Somando todos os valores, temos ${sumNumbers}.`
+    resultList.appendChild(respInfosItems)
+    respInfosItems.innerHTML = `O maior número é: ${numBiggest}.`
+    resultList.appendChild(respInfosItems)
+    respInfosItems.innerHTML = `O menor número é: ${smallestNum}.`
+    resultList.appendChild(respInfosItems)
+    
+
     if (numEsc.value === "") {
         error.innerHTML = "<font color='#ff0000'>Adicione valores antes de finalizar</font>"
         numEsc.focus()
-        makeOperations()
-    }
-    else {
+    } else {
         clearTableAndError()
         numEsc.value = ""
         numEsc.focus()
