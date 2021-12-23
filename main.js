@@ -40,18 +40,33 @@ function calcNumbers() {
 }
 
 function addValues() {
+    if (resultList.contains(respInfosItems)) {
+        respInfosItems.style.display = "none"
+    }
+
     let itemTable = document.createElement("option")
     itemTable.text = `Valor ${numEsc.value} adicionado`
     list.appendChild(itemTable)
 }
 
+let respInfosItems = document.createElement("p")
+
 const btnClear = document.querySelector("#btn-clear")
 btnClear.addEventListener("click", () => {
+    if (numEsc.value === "") {
+        error.innerHTML = "<font color='#ff0000'>Adicione valores antes de finalizar</font>"
+        numEsc.focus()
+    } else {
+        clearTableAndError()
+        numEsc.value = ""
+        numEsc.focus()
+    }
+
     let sumNumbers = 0
     let numBiggest = 0
     let smallestNum = 0
     let mediaValues = 0
-    
+
     for (let item in listNumbers) {
         sumNumbers += listNumbers[item]
 
@@ -61,26 +76,14 @@ btnClear.addEventListener("click", () => {
 
         if (smallestNum < listNumbers[item]) {
             smallestNum = listNumbers[item]
-        }    
+        }
     }
-    
-    let respInfosItems = document.createElement("p")
-    respInfosItems.innerHTML = `Somando todos os valores, temos ${sumNumbers}.`
-    resultList.appendChild(respInfosItems)
+
+    /* respInfosItems.innerHTML = `Somando todos os valores, temos ${sumNumbers}.`
+    resultList.appendChild(respInfosItems) */
+
     respInfosItems.innerHTML = `O maior número é: ${numBiggest}.`
     resultList.appendChild(respInfosItems)
-    respInfosItems.innerHTML = `O menor número é: ${smallestNum}.`
-    resultList.appendChild(respInfosItems)
-    
-
-    if (numEsc.value === "") {
-        error.innerHTML = "<font color='#ff0000'>Adicione valores antes de finalizar</font>"
-        numEsc.focus()
-    } else {
-        clearTableAndError()
-        numEsc.value = ""
-        numEsc.focus()
-    }
 })
 
 function clearTableAndError() {
