@@ -51,11 +51,8 @@ input[type="number"]{
     cursor: pointer;
 }
 
-#error{
-    color: #ff0000;
-}
-
 select{
+    width: 40%;
     appearance: none;
     height: fit-content;
     overflow: auto;

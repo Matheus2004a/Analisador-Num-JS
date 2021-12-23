@@ -5,30 +5,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Tabuada</title>
+    <title>Analisador de Números</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <header>
-        <h2>Tabuada</h2>
+        <h2>Analisador de Números</h2>
     </header>
 
     <section>
         <form action="">
             <fieldset>
-                <label for="">Escolha um número:</label>
-                <input type="number" name="txt-initial" id="txt-esc" autofocus>
-                <input type="submit" value="Gerar tabuada" class="buttons" id="btn-submit"></input>
-                <input type="reset" value="Limpar" class="buttons" id="btn-clear"></input>
+                <label for="">Escolha um número (entre 1 à 100):</label>
+                <input type="number" name="txt-initial" id="num-esc" autofocus>
+                <input type="submit" value="Adicionar" class="buttons" id="btn-submit"></input> 
             </fieldset>
         </form>
+        
+        <div>
+            <select size="10">
+                <option value=""></option>
+            </select>
+        </div>
+        <input type="submit" value="Finalizar" class="buttons" id="btn-clear"></input> 
 
-        <p id="error"></p>
-
-        <select size="10">
-            <option value="">Digite um número acima</option>
-        </select>
+        <div class="content-resp">
+        </div>
     </section>
 
     <footer>
