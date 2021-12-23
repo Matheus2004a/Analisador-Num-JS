@@ -52,12 +52,25 @@ input[type="number"]{
 }
 
 select{
-    width: 40%;
+    width: 45%;
     appearance: none;
-    height: fit-content;
     overflow: auto;
 }
 
 footer{
     font-style: italic;
+}
+
+@media (max-width: 880px){
+    header h2{
+        font-size: 1.2rem;
+    }
+
+    fieldset{
+        display: grid;
+    }
+
+    .buttons{
+        width: 100%;
+    }
 }
