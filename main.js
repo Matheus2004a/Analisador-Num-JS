@@ -32,36 +32,42 @@ function calcNumbers() {
     if (isNumber(numEsc.value) && !inList(numEsc.value, listNumbers)) {
         listNumbers.push(Number(numEsc.value))
         addValues()
-        clearTableAndError()
+        error.innerHTML = ""
     } else {
-        verifyErrors()
+        error.innerHTML = "<font color='#ff0000'>Valor inválido ou já encontrado na lista</font>"
+        form.appendChild(error)
     }
+    numEsc.value = ""
     console.log(listNumbers)
 }
 
-function addValues() {
-    if (resultList.contains(respInfosItems)) {
-        respInfosItems.style.display = "none"
-    }
-
-    let itemTable = document.createElement("option")
-    itemTable.text = `Valor ${numEsc.value} adicionado`
-    list.appendChild(itemTable)
-}
-
-let respInfosItems = document.createElement("p")
+const error = document.createElement("p")
 
 const btnClear = document.querySelector("#btn-clear")
-btnClear.addEventListener("click", () => {
-    if (numEsc.value === "") {
+btnClear.addEventListener("click", stopOperations)
+
+function stopOperations() {
+    if (listNumbers.length === 0) {
         error.innerHTML = "<font color='#ff0000'>Adicione valores antes de finalizar</font>"
+        form.appendChild(error)
         numEsc.focus()
     } else {
-        clearTableAndError()
+        makeOperations()
+        error.innerHTML = ""
         numEsc.value = ""
         numEsc.focus()
     }
+}
 
+function addValues() {
+    let itemTable = document.createElement("option")
+    itemTable.text = `Valor ${numEsc.value} adicionado`
+    list.appendChild(itemTable)
+
+    resultList.innerHTML = ""
+}
+
+function makeOperations() {
     let sumNumbers = 0
     let numBiggest = 0
     let smallestNum = 0
@@ -73,26 +79,15 @@ btnClear.addEventListener("click", () => {
         if (listNumbers[item] >= numBiggest) {
             numBiggest = listNumbers[item]
         }
-
-        if (smallestNum < listNumbers[item]) {
+        else {
             smallestNum = listNumbers[item]
         }
     }
+    mediaValues = sumNumbers / listNumbers.length
 
-    /* respInfosItems.innerHTML = `Somando todos os valores, temos ${sumNumbers}.`
-    resultList.appendChild(respInfosItems) */
-
-    respInfosItems.innerHTML = `O maior número é: ${numBiggest}.`
-    resultList.appendChild(respInfosItems)
-})
-
-function clearTableAndError() {
-    error.innerHTML = ""
-}
-
-const error = document.createElement("p")
-
-function verifyErrors() {
-    error.innerHTML = "<font color='#ff0000'>Valor inválido ou já encontrado na lista</font>"
-    form.appendChild(error)
+    resultList.innerHTML = `Ao todo temos ${listNumbers.length} números cadastrados. <br>`
+    resultList.innerHTML += `Somando todos os valores, temos ${sumNumbers}. <br>`
+    resultList.innerHTML += `O maior número é: ${numBiggest}. <br>`
+    resultList.innerHTML += `O menor número é: ${smallestNum}. <br>`
+    resultList.innerHTML += `A média de todos os valores é: ${mediaValues.toFixed(2)}`
 }
