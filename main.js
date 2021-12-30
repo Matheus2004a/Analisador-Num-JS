@@ -38,7 +38,6 @@ function calcNumbers() {
         form.appendChild(error)
     }
     numEsc.value = ""
-    console.log(listNumbers)
 }
 
 const error = document.createElement("p")
